@@ -13,10 +13,24 @@ public abstract class Booking {
   public static int objCounter;
   
   
-  public Booking(int bookingID, String firstName, String lastName, String emailID, String phoneNumber, String origin, 
-		  String destination, 	       ) {
-	  
-  }
+
+public Booking() {
+	super();
+}
+
+public Booking(String bookingID, String firstName, String lastName, String emailID, String phoneNumber, String origin,
+		String destination, int totalCost, String flightNumber) {
+	super();
+	this.bookingID = bookingID;
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.emailID = emailID;
+	this.phoneNumber = phoneNumber;
+	this.origin = origin;
+	this.destination = destination;
+	this.totalCost = totalCost;
+	this.flightNumber = flightNumber;
+}
 
 public String getBookingID() {
 	return bookingID;
@@ -90,5 +104,13 @@ public void setFlightNumber(String flightNumber) {
 	this.flightNumber = flightNumber;
 }
   
+
+@Override
+public String toString() {
+	return "Booking [bookingID=" + bookingID + ", firstName=" + firstName + ", lastName=" + lastName + ", emailID="
+			+ emailID + ", phoneNumber=" + phoneNumber + ", origin=" + origin + ", destination=" + destination
+			+ ", totalCost=" + totalCost + ", flightNumber=" + flightNumber + "]";
+}
+
 
 }

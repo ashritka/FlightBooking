@@ -1,5 +1,10 @@
-package com.ashrit.FlightBookingSystem;
+package com.ashrit.booking;
 
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 /*
  * Sample Menu driven program for Assignment 3: SP3-2019
@@ -15,6 +20,9 @@ import java.util.Scanner;
 
 public class BookingManagementSystem {
 
+	private static FlightRecords fr = new FlightRecords();
+	
+	private static ArrayList<Booking> bookingList = new ArrayList<Booking>();
 	
 	private static Scanner sc = new Scanner(System.in);
 
@@ -37,7 +45,7 @@ public class BookingManagementSystem {
 
 			// prompt user to enter selection
 			System.out.print("Enter selection: ");
-			selection = sc.nextLine();
+			selection = sc.next();
 
 			System.out.println();
 
@@ -104,6 +112,56 @@ public class BookingManagementSystem {
 	       * top of the class and you can refer to it here inside this method as required.
 	       */
 		
+		Booking booking = new FlightBooking();
+		
+		System.out.println("Please enter the number of Passengers");
+		int num = sc.nextInt();
+		booking.setNumPassengers(num);
+		
+		for (int i = 0; i < num; i++) {
+			
+			System.out.println("Please enter firstname for passenger" + (i + 1));
+			String fname = sc.next();
+			
+			System.out.println("Please enter last name for passenger" + (i + 1));
+			String lname = sc.next();
+			
+			Passenger p = new Passenger(fname, lname);
+			booking.addPassenger(p);
+			
+		}
+		
+		System.out.println("Please enter destination");
+		String d = sc.next();
+		
+		if (fr.checkFlightDestination(d) == false) {
+			System.out.println("We don't fly to that destination. Please select another destination");
+			return;
+		}
+		
+		booking.setDestination(d);
+		String flightNum = fr.getFlightNumber(d);
+	    booking.setFlightNumber(flightNum);
+	    
+	    System.out.println("Please enter departure date (mm/dd/yyyy)");
+	    
+	    String dateStr = sc.next();
+	    Date depDate;
+		try {
+			depDate = new SimpleDateFormat("MM/dd/yyyy").parse(dateStr);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Please enter date in the correct format MM/dd/yyyy");
+			return;
+		}  
+	   
+	    booking.setDepDate(depDate);
+	    
+	    System.out.println("Booking completed with booking id = " + booking.getBookingID());
+	    
+	    
+	    bookingList.add(booking);
+	    
 
 	}
 
@@ -141,6 +199,10 @@ public class BookingManagementSystem {
 	       * top of the class and you can refer to it here inside this method as required.
 	       */
 		   
+		
+		for (Booking b : bookingList) {
+			System.out.println(b);
+		}
 
 	}
 

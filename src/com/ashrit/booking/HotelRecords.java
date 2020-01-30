@@ -1,4 +1,4 @@
-package com.ashrit.FlightBookingSystem;
+package com.ashrit.booking;
 
 
 public class HotelRecords {

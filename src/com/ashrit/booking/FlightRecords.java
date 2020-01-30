@@ -1,4 +1,4 @@
-package com.ashrit.FlightBookingSystem;
+package com.ashrit.booking;
 
 /**
  * A representation of the existing Flight records, which your program will need

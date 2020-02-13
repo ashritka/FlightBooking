@@ -25,6 +25,14 @@ public class HotelRecords {
 		}
 	}
 	
+	public String[] getHotelNames() {
+		return hotelNames;
+	}
+
+	public double[] getHotelCostPerNight() {
+		return hotelCostPerNight;
+	}
+
 	public double getHotelCostPerNight(String hotelName) {
 
 		int index = getHotelIndex(hotelName);

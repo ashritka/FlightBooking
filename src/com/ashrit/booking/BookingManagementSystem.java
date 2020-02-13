@@ -4,6 +4,7 @@ package com.ashrit.booking;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 /*
@@ -21,8 +22,10 @@ import java.util.Scanner;
 public class BookingManagementSystem {
 
 	private static FlightRecords fr = new FlightRecords();
+	private static HotelRecords hr = new HotelRecords();
 	
 	private static ArrayList<Booking> bookingList = new ArrayList<Booking>();
+	private static ArrayList<HolidayBooking> hblist = new ArrayList<HolidayBooking>();
 	
 	private static Scanner sc = new Scanner(System.in);
 
@@ -162,6 +165,7 @@ public class BookingManagementSystem {
 	    
 	    bookingList.add(booking);
 	    
+	    
 
 	}
 
@@ -173,6 +177,63 @@ public class BookingManagementSystem {
 	       * needs to be declared. A Scanner reference called 'sc' have been declared at the 
 	       * top of the class and you can refer to it here inside this method as required.
 	       */	
+		//Booking booking = new HolidayBooking();
+		HolidayBooking booking = new HolidayBooking();
+		System.out.println("Please enter the destination");
+		String dest = sc.next();
+		if (fr.checkFlightDestination(dest) == false) {
+			System.out.println("We do not serve that route. Please select another route");
+			return;
+		}
+		booking.setDestination(dest);
+		
+		String flightnum = fr.getFlightNumber(dest);
+		booking.setFlightNumber(flightnum);
+		
+		System.out.println("Please enter number of Passengers");
+		int pnum = sc.nextInt();
+		
+		for (int i = 0; i < pnum; i++) {
+			System.out.println("Please enter firstname of the passgeneger" + (i+1));
+			String fname = sc.next();
+			
+			System.out.println("Please enter lastname of the passgeneger" + (i+1));
+			String lname = sc.next();
+			
+			Passenger p = new Passenger(fname, lname);
+			booking.addPassenger(p);
+		}
+		
+		System.out.println("Please enter the hotel name from the below options ");
+		hr.displayHotelOptions();
+		
+		String hname = sc.next();
+		if (Arrays.asList(hr.getHotelNames()).contains(hname)) {
+			booking.setHotelName(hname);
+		} else {
+			return;
+		}
+		
+		System.out.println("Please enter num of nights to stay");
+		int ncount = sc.nextInt();
+		booking.setNumNights(ncount);
+		
+		String dateStr = sc.next();
+	    Date depDate;
+		try {
+			depDate = new SimpleDateFormat("MM/dd/yyyy").parse(dateStr);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Please enter date in the correct format MM/dd/yyyy");
+			return;
+		}  
+	   
+	    booking.setDepDate(depDate);
+	    System.out.println("Booking completed with booking id = " + booking.getBookingID());
+	    
+	    bookingList.add(booking);
+	    
+	    
 	
 	}
 
@@ -198,20 +259,25 @@ public class BookingManagementSystem {
 	       * needs to be declared. A Scanner reference called 'sc' have been declared at the 
 	       * top of the class and you can refer to it here inside this method as required.
 	       */
-		   
+	    System.out.println("Please enter the booking id");   
+		int bookingNum = sc.nextInt();
+		
+		for (int i = 0; i < bookingList.size(); i++ ) {
+			if(bookingList.get(i).equals(bookingNum)) {
+				System.out.println(bookingList.get(i));
+			}
+		}
+		
 		
 		for (Booking b : bookingList) {
+			
 			System.out.println(b);
 		}
 
 	}
 
 	
-	
-	
-	
-	
-	
+
 	
 	private static void updateCheckinDate() {
 		/*

@@ -259,14 +259,28 @@ public class BookingManagementSystem {
 	       * needs to be declared. A Scanner reference called 'sc' have been declared at the 
 	       * top of the class and you can refer to it here inside this method as required.
 	       */
-	    System.out.println("Please enter the booking id");   
-		int bookingNum = sc.nextInt();
+	        
 		
-		for (int i = 0; i < bookingList.size(); i++ ) {
-			if(bookingList.get(i).equals(bookingNum)) {
-				System.out.println(bookingList.get(i));
-			}
-		}
+		// The method is called viewBookings that means it is going to print all bookings (notice
+		// the plural in bookings). Hence, we do not need to ask for booking id here. We will need
+		// to ask that when retrieving specific booking like in findBooking method.
+		
+		// System.out.println("Please enter the booking id");   
+		// int bookingNum = sc.nextInt();
+		
+		
+		//for (int i = 0; i < bookingList.size(); i++ ) {
+		
+		        // Also, when you say bookingList.get(i) it returns a Booking object
+			// (a whole object), you shold compare booking num inside that whole object
+			// this should be bookingList.get(i).getBookingNum().equals(bookingNum)
+			// Again, we do not need this code here as we are not retriving specific booking.
+			
+		
+		        // if (bookingList.get(i).equals(bookingNum)) {
+			//	System.out.println(bookingList.get(i));
+			// }
+		// }
 		
 		
 		for (Booking b : bookingList) {
